@@ -43,7 +43,6 @@ namespace FlightSimulator.Model
             // connecting the app to the simulator as client .
             sender.Connect(ip, commandPort);
         }
-        
 
         public void Dissconnect()
         {
@@ -59,6 +58,7 @@ namespace FlightSimulator.Model
             {
                 lat = value;
                 NotifyPropertyChanged("Lat");
+                Console.WriteLine("Lat set, in flightboardModel\n");       // CHECK ONLY !
             }
             get
             {
@@ -75,6 +75,7 @@ namespace FlightSimulator.Model
             {
                 lon = value;
                 NotifyPropertyChanged("Lon");
+                Console.WriteLine("Lon set, in flightboardModel\n");       // CHECK ONLY !
             }
             get
             {

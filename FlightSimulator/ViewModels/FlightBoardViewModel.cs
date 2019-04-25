@@ -21,6 +21,7 @@ namespace FlightSimulator.ViewModels
             model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 this.NotifyPropertyChanged("VM_" + e.PropertyName);
+                Console.WriteLine("registered notify method, flightboars viewModel\n");       // CHECK ONLY !
             };
         }
 
@@ -43,16 +44,32 @@ namespace FlightSimulator.ViewModels
         #region VM_Longitude
         public double VM_Lon
         {
-            set { model.Lon = value; NotifyPropertyChanged("VM_Lon"); }
-            get { return model.Lon; }
+            set
+            {
+                model.Lon = value;
+                NotifyPropertyChanged("VM_Lon");
+            }
+            get
+            {
+                Console.WriteLine("returning model.Lon\n");       // CHECK ONLY !
+                return model.Lon;
+            }
         }
         #endregion
 
         #region VM_Latitude
         public double VM_Lat
         {
-            set { model.Lat = value; NotifyPropertyChanged("VM_Lat"); }
-            get { return model.Lat; }
+            set
+            {
+                model.Lat = value;
+                NotifyPropertyChanged("VM_Lat");
+            }
+            get
+            {
+                Console.WriteLine("returning model.Lat\n");       // CHECK ONLY !
+                return model.Lat;
+            }
         }
         #endregion
 
