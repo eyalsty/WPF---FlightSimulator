@@ -58,7 +58,6 @@ namespace FlightSimulator.ViewModels
 
         #region OkCommand
         private ICommand okCommand;
-
         public ICommand OkCommand
         {
             get

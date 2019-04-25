@@ -28,7 +28,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <WrapPanel HorizontalAlignment="Center" Grid.ColumnSpan="2">
-            <Button Content="Settings" Margin="5" Click="SettingsButton_Click"/>
+            <Button Content="Settings" Margin="5" Click="SettingsButton_Click" />
             <Button Content="Connect" Margin="5" Command="{Binding ConnectCommand}"/>
         </WrapPanel>
         <TextBlock Style="{StaticResource LabelStyle}" LayoutTransform="{StaticResource rotate}" VerticalAlignment="Center">Lon</TextBlock>

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
@@ -51,8 +52,14 @@ namespace FlightSimulator.ViewModels
         public double VM_Lat
         {
             set { model.Lat = value; NotifyPropertyChanged("VM_Lat"); }
-            get{ return model.Lat; }
+            get { return model.Lat; }
         }
         #endregion
+
+        public void Dissconnect(object sender, EventArgs e)
+        {
+            model.Dissconnect();
+        }
+        
     }
 }

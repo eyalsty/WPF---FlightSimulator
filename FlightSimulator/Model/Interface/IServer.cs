@@ -10,6 +10,8 @@ namespace FlightSimulator.Model.Interface
     {
         void Start(string ip, int port);
 
-        void Recieve(FlightBoardModel model, bool stop);
+        void Recieve(FlightBoardModel model, ref bool stop);
+
+        bool IsConnected { get; }
     }
 }

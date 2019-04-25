@@ -44,6 +44,9 @@ namespace FlightSimulator.Views
 
             plotter.AddLineGraph(planeLocations, 2, "Route");
             vm.PropertyChanged += Vm_PropertyChanged;
+
+            // closing the client and server while closing the GUI.
+             this.Dispatcher.ShutdownStarted += vm.Dissconnect;
         }
 
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -51,17 +54,15 @@ namespace FlightSimulator.Views
             if(e.PropertyName.Equals("VM_Lat") || e.PropertyName.Equals("VM_Lon"))
             {
                 Point p1 = new Point(vm.VM_Lat, vm.VM_Lon);
-
                 planeLocations.AppendAsync(Dispatcher, p1);
             }
         }
 
-        // .................
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindowView settings_v = new SettingsWindowView();
-            settings_v.Show();
+            settings_v.ShowDialog();
         }
 
     }

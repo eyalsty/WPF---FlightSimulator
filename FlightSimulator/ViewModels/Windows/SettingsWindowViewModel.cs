@@ -76,7 +76,7 @@ namespace FlightSimulator.ViewModels.Windows
             model.SaveSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
-            CloseAction?.Invoke();          // CHECK !
+            CloseAction?.Invoke();
         }
         #endregion
 
@@ -94,7 +94,7 @@ namespace FlightSimulator.ViewModels.Windows
             model.ReloadSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
-            CloseAction?.Invoke();          // CHECK !
+            CloseAction?.Invoke(); 
         }
         #endregion
         #endregion
