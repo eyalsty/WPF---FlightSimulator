@@ -71,7 +71,7 @@
     <Compile Include="Model\FlightBoardModel.cs" />
     <Compile Include="Model\InfoReceiver.cs" />
     <Compile Include="Model\Interface\IClient.cs" />
-    <Compile Include="Model\Interface\IServer.cs" />
+    <Compile Include="Model\Interface\INotifierServer.cs" />
     <Compile Include="Model\Interface\ISettingsModel.cs" />
     <Compile Include="Model\CommandSender.cs" />
     <Compile Include="Model\ManualModel.cs" />
@@ -85,6 +85,9 @@
     </Compile>
     <Compile Include="Views\FlightBoard.xaml.cs">
       <DependentUpon>FlightBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlightBoardView.xaml.cs">
+      <DependentUpon>FlightBoardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Joystick.xaml.cs">
       <DependentUpon>Joystick.xaml</DependentUpon>
@@ -108,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FlightBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FlightBoardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

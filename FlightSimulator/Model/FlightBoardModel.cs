@@ -1,6 +1,7 @@
 ﻿using FlightSimulator.Model.Interface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,14 +12,19 @@ namespace FlightSimulator.Model
 {
     public class FlightBoardModel : BaseNotifyModel
     {
-        private IClient sender;
-        private IServer reciever;
+        private IClient sender;    
+        private INotifierServer reciever;                   // check only .
         private bool stop;
         
         public FlightBoardModel()
         {
             sender = CommandSender.Instance;
-            reciever = InfoReceiver.Instance;
+            reciever = InfoReceiver.Instance;          /// check only .
+
+            reciever.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            {
+                this.NotifyPropertyChanged(e.PropertyName);
+            };
 
             stop = false;
         }
@@ -57,12 +63,10 @@ namespace FlightSimulator.Model
             set
             {
                 lat = value;
-                NotifyPropertyChanged("Lat");
-                Console.WriteLine("Lat set, in flightboardModel\n");       // CHECK ONLY !
             }
             get
             {
-                return lat;
+                return reciever.Lat;                // change
             }
         }
         #endregion
@@ -74,12 +78,10 @@ namespace FlightSimulator.Model
             set
             {
                 lon = value;
-                NotifyPropertyChanged("Lon");
-                Console.WriteLine("Lon set, in flightboardModel\n");       // CHECK ONLY !
             }
             get
             {
-                return lon;
+                return reciever.Lon;             // change
             }
         }
         #endregion

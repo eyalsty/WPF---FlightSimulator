@@ -27,13 +27,13 @@ namespace FlightSimulator.Views
     public partial class FlightBoard : UserControl
     {
         ObservableDataSource<Point> planeLocations = null;
-        private FlightBoardViewModel vm = null;
+         private FlightBoardViewModel vm = null;
 
         public FlightBoard()
         {
             InitializeComponent();
-            vm = new FlightBoardViewModel();
-            this.DataContext = vm;
+             vm = new FlightBoardViewModel();
+             this.DataContext = vm;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -42,20 +42,20 @@ namespace FlightSimulator.Views
             // Set identity mapping of point in collection to point on plot
             planeLocations.SetXYMapping(p => p);
 
-            vm.PropertyChanged += Vm_PropertyChanged;
+             vm.PropertyChanged += Vm_PropertyChanged;
 
             plotter.AddLineGraph(planeLocations, 2, "Route");
             
-
             // closing the client and server while closing the GUI.
-             this.Dispatcher.ShutdownStarted += vm.Dissconnect;
+            this.Dispatcher.ShutdownStarted += vm.Dissconnect;
         }
 
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if(e.PropertyName.Equals("VM_Lat") || e.PropertyName.Equals("VM_Lon"))
             {
-                Console.WriteLine("inside VM_PropertyChanged, FlightBoard.cs\n");       // CHECK ONLY !
+                Console.WriteLine("inside VM_PropertyChanged, FlightBoard.cs -> lat={0}, lon={1}", vm.VM_Lat, vm.VM_Lon);       // CHECK ONLY !
+
                 Point p1 = new Point(vm.VM_Lat, vm.VM_Lon);
                 planeLocations.AppendAsync(Dispatcher, p1);
             }

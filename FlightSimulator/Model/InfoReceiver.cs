@@ -1,6 +1,7 @@
 ﻿using FlightSimulator.Model.Interface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -10,15 +11,15 @@ using System.Windows;
 
 namespace FlightSimulator.Model
 {
-    public class InfoReceiver : IServer
+    public class InfoReceiver : INotifierServer        // for check only !
     {
         #region Singelton
-        private static IServer instance = null;
-        public static IServer Instance
+        private static INotifierServer instance = null;
+        public static INotifierServer Instance
         {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     instance = new InfoReceiver();
                 }
@@ -31,10 +32,19 @@ namespace FlightSimulator.Model
         private TcpListener listener;
         private TcpClient client;
 
+        
         public InfoReceiver()
         {
             listener = null;
             client = null;
+        }
+
+        public bool IsConnected
+        {
+            get
+            {
+                return client.Connected;
+            }
         }
 
         public void Start(string ip, int port)
@@ -44,38 +54,12 @@ namespace FlightSimulator.Model
 
             client = listener.AcceptTcpClient();
         }
-        
-        // this is the true one .
-        /*public void Recieve(FlightBoardModel model, ref bool stop)
-        {
-            
-            NetworkStream stream = client.GetStream();
-            
-            while (!stop)
-            {
-                byte[] data = new byte[client.ReceiveBufferSize];
-                int read = stream.Read(data, 0, data.Length);
-
-                string[] recieved = Encoding.ASCII.GetString(data, 0, read).Split(',');
-                
-                // FOR CHECK ONLY !!!
-                if (recieved.Length >= 2)
-                    Console.WriteLine(" the recieved values are: " + recieved[0] + " " + recieved[1]);
-                
-                model.Lon = Convert.ToDouble(recieved[0]);
-                model.Lat = Convert.ToDouble(recieved[1]);   
-            }
-
-            listener.Stop();
-            client.Close();
-        }*/
 
         public void Recieve(FlightBoardModel model, ref bool stop)
         {
 
             NetworkStream stream = client.GetStream();
-            double lon = 0;
-            double lat = 0;
+
             bool updated = false;
 
             while (!stop)
@@ -93,15 +77,13 @@ namespace FlightSimulator.Model
                 {
                     lon = Convert.ToDouble(recieved[0]);
                     lat = Convert.ToDouble(recieved[1]);
-                    Console.WriteLine("updated = true !!!!\n");     // CHECK ONLY !
                     updated = true;
                 }
-                
+
                 if (updated)
                 {
-                    model.Lon = Convert.ToDouble(recieved[0]);
-                    model.Lat = Convert.ToDouble(recieved[1]);
-                    Console.WriteLine("continue with updated = true !!!\n");     // CHECK ONLY !
+                    this.Lon = Convert.ToDouble(recieved[0]);
+                    this.Lat = Convert.ToDouble(recieved[1]);
                 }
             }
 
@@ -109,12 +91,45 @@ namespace FlightSimulator.Model
             client.Close();
         }
 
-        public bool IsConnected
+        #region Longitude
+        private double lon;
+        public double Lon
         {
             get
             {
-                return client.Connected;
+                return lon;
+            }
+            set
+            {
+                lon = value;
+                NotifyPropertyChanged("Lon");
             }
         }
+        #endregion
+
+        #region latitude
+        private double lat;
+        public double Lat
+        {
+            get
+            {
+                return lat;
+            }
+            set
+            {
+                lat = value;
+                NotifyPropertyChanged("Lat");
+            }
+        }
+        #endregion
+
+        #region Notifier
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        private void NotifyPropertyChanged(string propName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
+        #endregion
     }
 }

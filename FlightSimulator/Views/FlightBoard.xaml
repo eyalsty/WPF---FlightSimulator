@@ -24,8 +24,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="9*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <WrapPanel HorizontalAlignment="Center" Grid.ColumnSpan="2">
             <Button Content="Settings" Margin="5" Click="SettingsButton_Click" />
