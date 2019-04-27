@@ -13,13 +13,13 @@ namespace FlightSimulator.Model
     public class FlightBoardModel : BaseNotifyModel
     {
         private IClient sender;    
-        private INotifierServer reciever;                   // check only .
+        private INotifierServer reciever;
         private bool stop;
         
         public FlightBoardModel()
         {
             sender = CommandSender.Instance;
-            reciever = InfoReceiver.Instance;          /// check only .
+            reciever = InfoReceiver.Instance;
 
             reciever.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
@@ -42,7 +42,7 @@ namespace FlightSimulator.Model
             if (reciever.IsConnected)
             {
                 // starting to recieve information from the simulator .
-                Thread thread = new Thread(() => reciever.Recieve(this, ref stop));
+                Thread thread = new Thread(() => reciever.Recieve(ref stop));
                 thread.Start();
             }
 
@@ -57,32 +57,16 @@ namespace FlightSimulator.Model
         }
 
         #region Latitude
-        private double lat;
         public double Lat
         {
-            set
-            {
-                lat = value;
-            }
-            get
-            {
-                return reciever.Lat;                // change
-            }
+            get { return reciever.Lat; }
         }
         #endregion
 
         #region Longitude
-        private double lon;
         public double Lon
         {
-            set
-            {
-                lon = value;
-            }
-            get
-            {
-                return reciever.Lon;             // change
-            }
+            get { return reciever.Lon; }
         }
         #endregion
     }

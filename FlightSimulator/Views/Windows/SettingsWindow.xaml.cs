@@ -19,16 +19,17 @@ namespace FlightSimulator.Views.Windows
     /// <summary>
     /// Interaction logic for SettingsWindowView.xaml
     /// </summary>
-    public partial class SettingsWindowView : Window
+    public partial class SettingsWindow : Window
     {
         private SettingsWindowViewModel vm;
 
-        public SettingsWindowView()
+        public SettingsWindow()
         {
             InitializeComponent();
             vm = new SettingsWindowViewModel(new ApplicationSettingsModel());
             this.DataContext = vm;
             // CHECK, maybe there is a better solution .
+
             if (vm.CloseAction == null)
             {
                 vm.CloseAction = () => this.Close();

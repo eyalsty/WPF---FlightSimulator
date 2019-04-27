@@ -28,8 +28,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel HorizontalAlignment="Center" Grid.ColumnSpan="2">
-            <Button Content="Settings" Margin="5" Click="SettingsButton_Click" />
             <Button Content="Connect" Margin="5" Command="{Binding ConnectCommand}"/>
+            <Button Content="Settings" Margin="5" Command="{Binding SettingsCommand}" />
         </WrapPanel>
         <TextBlock Style="{StaticResource LabelStyle}" LayoutTransform="{StaticResource rotate}" VerticalAlignment="Center">Lon</TextBlock>
         <d3:ChartPlotter Grid.Row="1" Grid.Column="1" LegendVisible="False" Name="plotter">

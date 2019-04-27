@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlightSimulator.Model;
 using FlightSimulator.ViewModels;
+using FlightSimulator.Views.Interface;
 using FlightSimulator.Views.Windows;
 using Microsoft.Research.DynamicDataDisplay;
 using Microsoft.Research.DynamicDataDisplay.DataSources;
@@ -32,7 +33,8 @@ namespace FlightSimulator.Views
         public FlightBoard()
         {
             InitializeComponent();
-             vm = new FlightBoardViewModel();
+
+             vm = new FlightBoardViewModel(new SettingsDisplayer());
              this.DataContext = vm;
         }
 
@@ -45,29 +47,19 @@ namespace FlightSimulator.Views
              vm.PropertyChanged += Vm_PropertyChanged;
 
             plotter.AddLineGraph(planeLocations, 2, "Route");
-            
-            // closing the client and server while closing the GUI.
-            this.Dispatcher.ShutdownStarted += vm.Dissconnect;
+
+            // dissconnecting the client and the server while closing the GUI.
+            this.Dispatcher.ShutdownStarted += vm.Dissconnect; 
         }
 
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if(e.PropertyName.Equals("VM_Lat") || e.PropertyName.Equals("VM_Lon"))
             {
-                Console.WriteLine("inside VM_PropertyChanged, FlightBoard.cs -> lat={0}, lon={1}", vm.VM_Lat, vm.VM_Lon);       // CHECK ONLY !
-
                 Point p1 = new Point(vm.VM_Lat, vm.VM_Lon);
                 planeLocations.AppendAsync(Dispatcher, p1);
             }
         }
-
-
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            SettingsWindowView settings_v = new SettingsWindowView();
-            settings_v.ShowDialog();
-        }
-
     }
 
 }

@@ -86,9 +86,7 @@
     <Compile Include="Views\FlightBoard.xaml.cs">
       <DependentUpon>FlightBoard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlightBoardView.xaml.cs">
-      <DependentUpon>FlightBoardView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Views\Interface\IWindowDisplayer.cs" />
     <Compile Include="Views\Joystick.xaml.cs">
       <DependentUpon>Joystick.xaml</DependentUpon>
     </Compile>
@@ -99,8 +97,9 @@
     <Compile Include="Views\ManualView.xaml.cs">
       <DependentUpon>ManualView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Windows\SettingsWindowView.xaml.cs">
-      <DependentUpon>SettingsWindowView.xaml</DependentUpon>
+    <Compile Include="Views\SettingsDisplayer.cs" />
+    <Compile Include="Views\Windows\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
@@ -114,10 +113,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FlightBoardView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Joystick.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,7 +121,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Windows\SettingsWindowView.xaml">
+    <Page Include="Views\Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

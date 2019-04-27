@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace FlightSimulator.Model
 {
-    public class InfoReceiver : INotifierServer        // for check only !
+    public class InfoReceiver : INotifierServer
     {
         #region Singelton
         private static INotifierServer instance = null;
@@ -29,6 +29,7 @@ namespace FlightSimulator.Model
         }
         #endregion
 
+        // data members
         private TcpListener listener;
         private TcpClient client;
 
@@ -55,25 +56,19 @@ namespace FlightSimulator.Model
             client = listener.AcceptTcpClient();
         }
 
-        public void Recieve(FlightBoardModel model, ref bool stop)
+        public void Recieve(ref bool stop)
         {
 
             NetworkStream stream = client.GetStream();
-
             bool updated = false;
 
             while (!stop)
             {
                 byte[] data = new byte[client.ReceiveBufferSize];
                 int read = stream.Read(data, 0, data.Length);
-
                 string[] recieved = Encoding.ASCII.GetString(data, 0, read).Split(',');
-
-                // FOR CHECK ONLY !!!
-                if (recieved.Length >= 2)
-                    Console.WriteLine(" the recieved values are: " + recieved[0] + " " + recieved[1]);
-
-                if (!updated)
+                double throttle = Convert.ToDouble(recieved[21]);
+                if (!updated && (throttle > 0))
                 {
                     lon = Convert.ToDouble(recieved[0]);
                     lat = Convert.ToDouble(recieved[1]);
@@ -95,14 +90,14 @@ namespace FlightSimulator.Model
         private double lon;
         public double Lon
         {
-            get
-            {
-                return lon;
-            }
             set
             {
                 lon = value;
                 NotifyPropertyChanged("Lon");
+            }
+            get
+            {
+                return lon;
             }
         }
         #endregion
@@ -111,14 +106,14 @@ namespace FlightSimulator.Model
         private double lat;
         public double Lat
         {
-            get
-            {
-                return lat;
-            }
             set
             {
                 lat = value;
                 NotifyPropertyChanged("Lat");
+            }
+            get
+            {
+                return lat;
             }
         }
         #endregion

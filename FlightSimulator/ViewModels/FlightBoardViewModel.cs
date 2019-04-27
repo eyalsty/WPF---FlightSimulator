@@ -1,5 +1,6 @@
 ﻿using FlightSimulator.Model;
 using FlightSimulator.Model.Interface;
+using FlightSimulator.Views.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,15 +15,32 @@ namespace FlightSimulator.ViewModels
     public class FlightBoardViewModel : BaseNotify
     {
         private FlightBoardModel model;
+        private IWindowDisplayer displayer;
 
-        public FlightBoardViewModel()
+        public FlightBoardViewModel(IWindowDisplayer windowDisplayer)
         {
+            this.displayer = windowDisplayer;
+
             model = new FlightBoardModel();
             model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 this.NotifyPropertyChanged("VM_" + e.PropertyName);
             };
         }
+
+        #region VM_Longitude
+        public double VM_Lon
+        {
+            get { return model.Lon; }
+        }
+        #endregion
+
+        #region VM_Latitude
+        public double VM_Lat
+        {
+            get { return model.Lat; }
+        }
+        #endregion
 
         #region ConnectCommand
         private ICommand connectCommand;
@@ -40,33 +58,20 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
 
-        #region VM_Longitude
-        public double VM_Lon
+        #region SettingCommand
+        private ICommand settingsCommand;
+        public ICommand SettingsCommand
         {
-            set
-            {
-                model.Lon = value;
-                NotifyPropertyChanged("VM_Lon");
-            }
             get
             {
-                return model.Lon;
+                return settingsCommand ?? (settingsCommand = new CommandHandler(() => OnSettings()));
             }
         }
-        #endregion
 
-        #region VM_Latitude
-        public double VM_Lat
+        private void OnSettings()
         {
-            set
-            {
-                model.Lat = value;
-                NotifyPropertyChanged("VM_Lat");
-            }
-            get
-            {
-                return model.Lat;
-            }
+            displayer.Show();
+            displayer = displayer.Clone() as IWindowDisplayer;
         }
         #endregion
 
@@ -74,6 +79,5 @@ namespace FlightSimulator.ViewModels
         {
             model.Dissconnect();
         }
-        
     }
 }

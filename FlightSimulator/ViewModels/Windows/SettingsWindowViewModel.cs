@@ -49,8 +49,6 @@ namespace FlightSimulator.ViewModels.Windows
             }
         }
 
-        public Action CloseAction { set; get; }
-
         public void SaveSettings()
         {
             model.SaveSettings();
@@ -60,6 +58,8 @@ namespace FlightSimulator.ViewModels.Windows
         {
             model.ReloadSettings();
         }
+
+        public Action CloseAction { set; get; }
 
         #region Commands
         #region OkCommand
@@ -98,6 +98,7 @@ namespace FlightSimulator.ViewModels.Windows
         }
         #endregion
         #endregion
+        
     }
 }
 

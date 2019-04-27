@@ -11,12 +11,12 @@ namespace FlightSimulator.Model.Interface
     {
         void Start(string ip, int port);
 
-        void Recieve(FlightBoardModel model, ref bool stop);
+        void Recieve(ref bool stop);
 
         bool IsConnected { get; }
 
-        // needs a better solution ! maybe with flightboard model as argument to recieve.
         double Lon { set; get; }
+
         double Lat { set; get; }
     }
 }
