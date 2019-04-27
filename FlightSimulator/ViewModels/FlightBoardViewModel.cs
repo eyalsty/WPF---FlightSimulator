@@ -17,6 +17,10 @@ namespace FlightSimulator.ViewModels
         private FlightBoardModel model;
         private IWindowDisplayer displayer;
 
+        /* the ViewModel responsible of the Flight Board.
+         * receiving a displayer as a parameter and initializes it.
+         * also, creates new FlightBoard model and registers itself to be
+         * notified when properties change*/ 
         public FlightBoardViewModel(IWindowDisplayer windowDisplayer)
         {
             this.displayer = windowDisplayer;
@@ -28,6 +32,7 @@ namespace FlightSimulator.ViewModels
             };
         }
 
+        //the view uses this property to receive the Lon value from the model(data binding)
         #region VM_Longitude
         public double VM_Lon
         {
@@ -35,6 +40,7 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
 
+        //the view uses this property to receive the Lat value from the model(data binding)
         #region VM_Latitude
         public double VM_Lat
         {

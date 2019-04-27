@@ -11,12 +11,17 @@ namespace FlightSimulator.Model
     public class ManualModel : BaseNotifyModel
     {
         private IClient client;
-        
+
+        //initialize the client data member with a singletone design pattern(single instance)
         public ManualModel()
         {
             client = CommandSender.Instance;
         }
 
+        /* Property responsible for the Throttle value.
+         * when being set(from the VM, and the VM get its value from the view),
+         * rounds the value and sends the new value to the simulator,
+         * also notifies the VM that the Thorttle changed*/
         #region Throttle
         private double throttle;
         public double Throttle
@@ -37,7 +42,7 @@ namespace FlightSimulator.Model
         private string throttleLabel;
         public string ThrottleLabel
         {
-
+            //update the throttle value and notifies the VM for the change
             set
             {
                 throttleLabel = value;
@@ -50,6 +55,11 @@ namespace FlightSimulator.Model
         }
         #endregion
 
+
+        /* Property responsible for the Rudder value.
+           when being set(from the VM, and the VM get its value from the view),
+           rounds the value and sends the new value to the simulator,
+           also notifies the VM that the Rudder changed*/
         #region Rudder
         private double rudder;
         public double Rudder
@@ -70,6 +80,7 @@ namespace FlightSimulator.Model
         private string rudderLabel;
         public string RudderLabel
         {
+            //updates the new value of the rudder Label and notifies the VM for changes
             set
             {
                 rudderLabel = value;
@@ -77,11 +88,12 @@ namespace FlightSimulator.Model
             }
             get
             {
-                return Math.Round(rudder, 2).ToString();                
+                return Math.Round(rudder, 2).ToString();
             }
         }
         #endregion
 
+        //updates the Simulator with the new value of the Aileron
         #region Aileron
         private double aileron;
         public double Aileron
@@ -98,10 +110,11 @@ namespace FlightSimulator.Model
                 return aileron;
             }
         }
-        
+
         private string aileronLabel;
         public string AileronLabel
         {
+            //updates the new value of the Aileron Label and notifies the VM for changes
             set
             {
                 aileronLabel = value;
@@ -114,6 +127,7 @@ namespace FlightSimulator.Model
         }
         #endregion
 
+        //updates the Simulator with the new value of the Elevator
         #region Elevator
         private double elevator;
         public double Elevator
@@ -134,6 +148,7 @@ namespace FlightSimulator.Model
         private string elevatorLabel;
         public string ElevatorLabel
         {
+            //updates the new value of the elevator Label and notifies the VM for changes
             set
             {
                 elevatorLabel = value;
@@ -146,7 +161,8 @@ namespace FlightSimulator.Model
         }
 
         #endregion
-
+        /*function to build the string with the correct format for the Flight Simulator
+         * and send via the client data member that was connected before. */
         private void SendValue(string path, double value)
         {
             string line = path + " " + Math.Round(value, 2).ToString() + "\r\n";
