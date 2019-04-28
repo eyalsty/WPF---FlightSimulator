@@ -20,11 +20,11 @@ namespace FlightSimulator.Model
             return true;
         }
 
-        public event EventHandler CanExecuteChanged;
-
         public void Execute(object parameter)
         {
             _action();
         }
+
+        public event EventHandler CanExecuteChanged;
     }
 }

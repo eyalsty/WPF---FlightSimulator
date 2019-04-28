@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model.Interface
 {
+    /// <summary>
+    /// an interface for classes tht will be used as servers to
+    /// the flight simulatier.
+    /// </summary>
     public interface INotifierServer : INotifyPropertyChanged
     {
         void Start(string ip, int port);

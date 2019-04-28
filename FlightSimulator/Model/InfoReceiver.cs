@@ -11,16 +11,16 @@ using System.Windows;
 
 namespace FlightSimulator.Model
 {
-    /*implements the INotifierServer interface, responsible for acting as a server-side, 
-      function runs in new thread, being updated from the simulator and updates the VM 
-      the view for relevant changes */
+    /// <summary>
+    /// implements the INotifierServer interface, 
+    /// responsible for acting as a server-side.
+    /// </summary>
     public class InfoReceiver : INotifierServer
     {
-        /* implementation of the singletone design pattern, in order to force existence of
-           only one instance of the InfoReceiver object in our program (more then one 
-           InfoReceiver can cause ambiguous behavior)we make it static and the
-           constructor first check if the member already been initialized, if not-creates it */
         #region Singelton
+        /* implementation of the singleton design pattern, in order to force existence of
+           only one instance of the InfoReceiver object in our program (more then one 
+           InfoReceiver can cause ambiguous behavior). */
         private static INotifierServer instance = null;
         public static INotifierServer Instance
         {
@@ -30,23 +30,23 @@ namespace FlightSimulator.Model
                 {
                     instance = new InfoReceiver();
                 }
-
                 return instance;
             }
         }
         #endregion
 
-        // data members
+        /* data members */
         private TcpListener listener;
         private TcpClient client;
 
-        //constructor
+        /* constructor */
         public InfoReceiver()
         {
             listener = null;
             client = null;
         }
 
+        /* property for getting the connection status of the server. */
         public bool IsConnected
         {
             get
@@ -54,8 +54,10 @@ namespace FlightSimulator.Model
                 return client.Connected;
             }
         }
-        /*starting new server-side connection, starts listening for clients to connect
-        and is blocked until connection has been established */
+        
+        /* starting new server-side connection, 
+         * starts listening for clients to connect .
+         * blocked until connection has been established. */
         public void Start(string ip, int port)
         {
             listener = new TcpListener(IPAddress.Parse(ip), port);
@@ -63,9 +65,9 @@ namespace FlightSimulator.Model
 
             client = listener.AcceptTcpClient();
         }
-        /* function that acts like a server,runs in a different thread, always
-         * reading data from the Flight Simulator (the client) and updates the
-         * lon and the lat values */
+
+        /* recieving data from the Flight Simulator (the client)
+         * and updates the lon and the lat values. */
         public void Recieve(ref bool stop)
         {
             NetworkStream stream = client.GetStream();
@@ -77,6 +79,8 @@ namespace FlightSimulator.Model
                 int read = stream.Read(data, 0, data.Length);
                 string[] recieved = Encoding.ASCII.GetString(data, 0, read).Split(',');
                 double throttle = Convert.ToDouble(recieved[21]);
+
+                // for Lon and Lat will be updated in smaller gaps.
                 if (!updated && (throttle > 0))
                 {
                     lon = Convert.ToDouble(recieved[0]);
@@ -90,13 +94,14 @@ namespace FlightSimulator.Model
                     this.Lat = Convert.ToDouble(recieved[1]);
                 }
             }
-            //stop open thread's run and close connections before terminating the program
+
+            // close connections before terminating the program
             listener.Stop();
             client.Close();
         }
-        /*holds the latitude values, being updated from the Simulator
-          values received by the server */
+
         #region Longitude
+        /* holds the latitude values, being updated from the Simulator. */
         private double lon;
         public double Lon
         {
@@ -111,9 +116,9 @@ namespace FlightSimulator.Model
             }
         }
         #endregion
-        /*holds the latitude values, being updated from the Simulator
-        values received by the server */
+
         #region latitude
+        /*holds the latitude values, being updated from the Simulator. */
         private double lat;
         public double Lat
         {
@@ -131,7 +136,8 @@ namespace FlightSimulator.Model
 
         #region Notifier
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
+        /* helper method for notigy when some property changed. */
         private void NotifyPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));

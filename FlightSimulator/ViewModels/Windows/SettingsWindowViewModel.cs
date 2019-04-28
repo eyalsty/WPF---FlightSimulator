@@ -59,23 +59,27 @@ namespace FlightSimulator.ViewModels.Windows
             model.ReloadSettings();
         }
 
+        /* property of getting/setting the Close Action of the settings UI. */
         public Action CloseAction { set; get; }
 
         #region Commands
+
         #region OkCommand
         private ICommand _okCommand;
         public ICommand OkCommand
         {
             get
             {
-                return _okCommand ?? (_okCommand = new CommandHandler(() => OnClick()));
+                return _okCommand ?? (_okCommand = new CommandHandler(() => OnOk()));
             }
         }
-        private void OnClick()
+        private void OnOk()
         {
             model.SaveSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
+
+            // triggers the Close Action of the settings window .
             CloseAction?.Invoke();
         }
         #endregion
@@ -94,9 +98,12 @@ namespace FlightSimulator.ViewModels.Windows
             model.ReloadSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
+
+            // triggers the Close Action of the settings window .
             CloseAction?.Invoke(); 
         }
         #endregion
+
         #endregion
         
     }

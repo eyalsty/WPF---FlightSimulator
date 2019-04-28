@@ -33,7 +33,6 @@ namespace FlightSimulator.Views
         public FlightBoard()
         {
             InitializeComponent();
-
              vm = new FlightBoardViewModel(new SettingsDisplayer());
              this.DataContext = vm;
         }

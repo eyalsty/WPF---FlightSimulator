@@ -12,20 +12,23 @@ namespace FlightSimulator.Model
 {
     public class FlightBoardModel : BaseNotify
     {
+        /* data members */
+
         private IClient sender;    
         private INotifierServer reciever;
         private bool stop;
         
         public FlightBoardModel()
         {
-        //create singletone instance of a client and a server in order to communicate with Simulator
+            /* create singletone instance of a client and a server in order to 
+             * communicate with the Simulator. */
             sender = CommandSender.Instance;
             reciever = InfoReceiver.Instance;
-
             reciever.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 this.NotifyPropertyChanged(e.PropertyName);
             };
+
             stop = false;
         }
 

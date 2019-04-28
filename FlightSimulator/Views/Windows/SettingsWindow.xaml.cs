@@ -28,10 +28,10 @@ namespace FlightSimulator.Views.Windows
             InitializeComponent();
             vm = new SettingsWindowViewModel(new ApplicationSettingsModel());
             this.DataContext = vm;
-            // CHECK, maybe there is a better solution .
 
             if (vm.CloseAction == null)
             {
+                // register the close method of the settings window to its VM .
                 vm.CloseAction = () => this.Close();
             }
         }

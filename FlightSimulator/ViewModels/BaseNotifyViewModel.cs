@@ -5,12 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightSimulator
+namespace FlightSimulator.ViewModels
 {
-    /// <summary>
-    /// A base class for object with 'notify' feature .
-    /// </summary>
-    public abstract class BaseNotify : INotifyPropertyChanged
+    public abstract class BaseNotifyViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

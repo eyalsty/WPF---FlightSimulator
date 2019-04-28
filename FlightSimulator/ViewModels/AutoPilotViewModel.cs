@@ -13,18 +13,17 @@ namespace FlightSimulator.ViewModels
 {
     class AutoPilotViewModel : BaseNotify
     {
-        // data members
+        /* data member. */
         private AutoPilotModel model;
 
 
-        /* the ViewModel that responsible of the Auto Pilot bar.
+        /* the ViewModel that responsible of the Auto Pilot TextBox.
          creates new AutoPilot model and registers itself to be
          notified when its properties change, when the model's
-         properties change, the vm notifies the view*/
+         properties change, the vm notifies it to the view. */
         public AutoPilotViewModel()
         {
             model = new AutoPilotModel();
-
             model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 NotifyPropertyChanged("VM_" + e.PropertyName);
@@ -40,16 +39,18 @@ namespace FlightSimulator.ViewModels
         }
 
         /* Property that in charge of connecting between the Brush color displayed
-         * in the Auto pilot text box(in VIEW) to the color in the model */
+         * in the Auto pilot text box(in VIEW) to the color in the model. */
         public Brush VM_Background
         {
             get { return model.Background; }
             set { model.Background = value; }
         }
 
-        /* Command Property, activates the clickclear() function as lambda expression, but 
-         * first creates new clearCommand object if its NULL */
         #region ClearCommand
+        /// <summary>
+        /// Command property which in charge on the logic 
+        /// which activated after 'clear' button clicked.
+        /// </summary>
         private ICommand clearCommand;
         public ICommand ClearCommand
         {
@@ -60,16 +61,18 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        //clear the text displayed in the view textbox of the autopilot
+        /* clear the text displayed in the view textbox of the autopilot */
         void ClickClear()
         {
             VM_Text = "";
         }
         #endregion
 
-        /* Command Property, activates the clickok() function as lambda expression, but 
-         * first creates new clearCommand object if its NULL */
         #region OkCommand
+        /// <summary>
+        /// Command property which in charge on the logic 
+        /// which activated after 'Ok' button clicked.
+        /// </summary>
         private ICommand okCommand;
         public ICommand OkCommand
         {
@@ -79,7 +82,7 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        //runs the clickok() function of the model in a new Thread
+        /* runs model's ClickOk method with a different thread . */
         void ClickOk()
         {
             Thread t = new Thread(model.ClickOk);

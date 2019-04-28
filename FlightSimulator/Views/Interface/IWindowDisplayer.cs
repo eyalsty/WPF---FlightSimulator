@@ -7,6 +7,9 @@ using System.Windows;
 
 namespace FlightSimulator.Views.Interface
 {
+    /// <summary>
+    /// an interface for display any kind of window .
+    /// </summary>
     public interface IWindowDisplayer : ICloneable
     {
         void Show();

@@ -9,6 +9,11 @@ using System.Windows;
 
 namespace FlightSimulator.Views
 {
+    /// <summary>
+    /// A class which creates stting window and has the abillity
+    /// to show ansd close it. also can create a new instances
+    /// that  window .
+    /// </summary>
     public class SettingsDisplayer : IWindowDisplayer
     {
         Window settings;   
@@ -29,7 +34,6 @@ namespace FlightSimulator.Views
 
         public void Close()
         {
-            // currently no need with this method.
             settings.Close();
         }
     }

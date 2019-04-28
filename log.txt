@@ -1,0 +1,47 @@
+commit 8f5406cbfd0f70390700f576d2f8b6022db5613c
+Author: eyal styskin <eyal.styskin@live.biu.ac.il>
+Date:   Sun Apr 28 10:20:44 2019 +0300
+
+    pulled BaseNotify interface out, deleted BaseNotifyModel, removed uncessary setters and getters in the Manual_VM, added comments
+
+commit c477d4f4afc6bdd0aee604671050258ece40895f
+Author: eyal styskin <eyal.styskin@live.biu.ac.il>
+Date:   Sun Apr 28 00:17:59 2019 +0300
+
+    Added comments to VMs, not done
+
+commit 947ce087d0bb4d34932aa31e5a36938f82700a11
+Author: regevguy4 <45970256+regevguy4@users.noreply.github.com>
+Date:   Sat Apr 27 13:19:40 2019 +0300
+
+    an interface of WindowDisplayer, so the VM could open the settings window without knowing it . also some work on the server.
+
+commit 3300b3f01d81f209ed7b71a67e3f1182f2ee7375
+Author: regevguy4 <45970256+regevguy4@users.noreply.github.com>
+Date:   Fri Apr 26 13:48:24 2019 +0300
+
+    changed IServer to INotifierServer, the server works fine. also delete 'FlightBoardView' .
+
+commit c7fca6e9b6d6fc9dfbb1643c849d0edde85fc70f
+Author: regevguy4 <45970256+regevguy4@users.noreply.github.com>
+Date:   Thu Apr 25 14:13:01 2019 +0300
+
+    working on the plotter and the server .
+
+commit 383972af5219521eeb0d279dd1b2621e18f88b23
+Author: regevguy4 <45970256+regevguy4@users.noreply.github.com>
+Date:   Thu Apr 25 09:37:02 2019 +0300
+
+    worked on the 'clean exit' - dissconnecting the client and the server - done. also some work on the UI design .
+
+commit 299e75c4e8b988cc5422ca730dbd5f69f16b730a
+Author: regevguy4 <45970256+regevguy4@users.noreply.github.com>
+Date:   Tue Apr 23 05:15:23 2019 +0300
+
+    Add project files.
+
+commit 940f749ffe6da523cd528b594cc1e9e4922e92d8
+Author: regevguy4 <45970256+regevguy4@users.noreply.github.com>
+Date:   Tue Apr 23 05:15:20 2019 +0300
+
+    Add .gitignore and .gitattributes.

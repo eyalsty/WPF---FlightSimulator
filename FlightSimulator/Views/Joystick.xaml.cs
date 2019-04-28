@@ -38,11 +38,6 @@ namespace FlightSimulator.Views
         public static readonly DependencyProperty ElevatorStepProperty =
             DependencyProperty.Register("ElevatorStep", typeof(double), typeof(Joystick), new PropertyMetadata(1.0));
 
-        /* Unstable - needs work */
-        ///// <summary>Indicates whether the joystick knob resets its place after being released</summary>
-        //public static readonly DependencyProperty ResetKnobAfterReleaseProperty =
-        //    DependencyProperty.Register(nameof(ResetKnobAfterRelease), typeof(bool), typeof(VirtualJoystick), new PropertyMetadata(true));
-
         /// <summary>Current Aileron in degrees from 0 to 360</summary>
         public double Aileron
         {
@@ -79,13 +74,6 @@ namespace FlightSimulator.Views
             }
         }
 
-        /// <summary>Indicates whether the joystick knob resets its place after being released</summary>
-        //public bool ResetKnobAfterRelease
-        //{
-        //    get { return Convert.ToBoolean(GetValue(ResetKnobAfterReleaseProperty)); }
-        //    set { SetValue(ResetKnobAfterReleaseProperty, value); }
-        //}
-
         /// <summary>Delegate holding data for joystick state change</summary>
         /// <param name="sender">The object that fired the event</param>
         /// <param name="args">Holds new values for Aileron and Elevator</param>
@@ -115,8 +103,6 @@ namespace FlightSimulator.Views
             Knob.MouseLeftButtonDown += Knob_MouseLeftButtonDown;
             Knob.MouseLeftButtonUp += Knob_MouseLeftButtonUp;
             Knob.MouseMove += Knob_MouseMove;
-
-            // add the view model of eilron and elavator as Data context !!@!@!@!@
 
             centerKnob = Knob.Resources["CenterKnob"] as Storyboard;
         }

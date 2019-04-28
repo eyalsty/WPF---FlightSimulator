@@ -14,17 +14,17 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightBoardViewModel : BaseNotify
     {
+        /* data members */
         private FlightBoardModel model;
         private IWindowDisplayer displayer;
 
         /* the ViewModel responsible of the Flight Board.
-         * receiving a displayer as a parameter and initializes it.
+         * receiving a displayer as a parameter.
          * also, creates new FlightBoard model and registers itself to be
-         * notified when properties change*/ 
+         * notified when properties change. */ 
         public FlightBoardViewModel(IWindowDisplayer windowDisplayer)
         {
             this.displayer = windowDisplayer;
-
             model = new FlightBoardModel();
             model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
@@ -32,25 +32,30 @@ namespace FlightSimulator.ViewModels
             };
         }
 
-        //the view uses this property to receive the Lon value from the model(data binding)
         #region VM_Longitude
+        /* the view uses this property to receive the Lon value 
+         * from the model (data binding). */
         public double VM_Lon
         {
             get { return model.Lon; }
         }
         #endregion
 
-        //the view uses this property to receive the Lat value from the model(data binding)
         #region VM_Latitude
+        /* the view uses this property to receive the Lat value
+         * from the model (data binding). */
         public double VM_Lat
         {
             get { return model.Lat; }
         }
         #endregion
 
-        /*Binded to Command property of a Button in order to execute the "onConnect()" 
-         * function(lambda exp) when the button being pressed */
         #region ConnectCommand
+        /// <summary>
+        /// Binded to Command property of the
+        ///  'Connect' Button, in order to execute the "onConnect()" 
+        /// method (inside the lambda exp) when the button being pressed.
+        /// </summary>
         private ICommand connectCommand;
         public ICommand ConnectCommand
         {
@@ -59,16 +64,20 @@ namespace FlightSimulator.ViewModels
                 return connectCommand ?? (connectCommand = new CommandHandler(() => OnConnect()));
             }
         }
-        //runs the connect() func of the model that connects with the Flight Simulator
+
+        /* runs the connect() method of the model that connects with the Flight Simulator. */
         private void OnConnect()
         {
             model.Connect();
         }
         #endregion
-
-        /*Binded to Command property of a Button in order to execute the "onSettings()" 
-         *function(lambda exp) when the button being pressed */
+        
         #region SettingCommand
+        /// <summary>
+        /// Binded to Command property of the 'Settings' Button 
+        /// in order to execute the "onSettings()" 
+        /// method (inside the lambda exp) when the button being pressed. */
+        /// </summary>
         private ICommand settingsCommand;
         public ICommand SettingsCommand
         {
@@ -86,7 +95,8 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
 
-        //when program ends, terminates the connection with the Flight Simulator
+        /* terminates the connection with the Flight Simulator.
+         * will be used when the user will exit the main window. */
         public void Dissconnect(object sender, EventArgs e)
         {
             model.Disconnect();

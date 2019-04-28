@@ -12,15 +12,15 @@ namespace FlightSimulator.Model
     {
         private IClient cs;
 
-        //initializes the client data member, using a singletone design pattern
+        /* initializes the client data member, using its singleton attribute. */
         public AutoPilotModel()
         {
             cs = CommandSender.Instance;
         }
 
-        /*runs in a thread of its own. first sets the background color to red,
-         * then sending every command in a seperated line to the simulator
-         * 1 by 1 with 2 seconds delay. when done sets color back to white */
+        /* runs in a different thread. first sets the background color to red,
+         * then sending each command to the simulator
+         * with 2 seconds delay. when done sets color back to white. */
         public void ClickOk()
         {
             this.Background = Brushes.IndianRed;
@@ -35,8 +35,8 @@ namespace FlightSimulator.Model
             this.Background = Brushes.White;
         }
 
-        //holds the text of the AutoPilot textBox, when being updated notifies the VM
         #region Text
+        /* holds the text of the AutoPilot textBox, when being updated notifies the VM. */
         private string text;
         public string Text
         {
@@ -52,9 +52,9 @@ namespace FlightSimulator.Model
          }
         #endregion
 
-        /*holds the Background color of the AutoPilot textBox,
-         * when being updated notifies the VM */
         #region Background
+        /* holds the Background color of the AutoPilot textBox,
+         * when being updated notifies the VM. */
         private Brush background;
         public Brush Background
         {
