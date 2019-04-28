@@ -31,7 +31,7 @@
             <Button Content="Connect" Margin="5" Command="{Binding ConnectCommand}"/>
             <Button Content="Settings" Margin="5" Command="{Binding SettingsCommand}" />
         </WrapPanel>
-        <TextBlock Style="{StaticResource LabelStyle}" LayoutTransform="{StaticResource rotate}" VerticalAlignment="Center">Lon</TextBlock>
+        <TextBlock Grid.Row="1" Style="{StaticResource LabelStyle}" LayoutTransform="{StaticResource rotate}" VerticalAlignment="Center">Lon</TextBlock>
         <d3:ChartPlotter Grid.Row="1" Grid.Column="1" LegendVisible="False" Name="plotter">
         </d3:ChartPlotter>
         <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource LabelStyle}" HorizontalAlignment="Center">Lat</TextBlock>

@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace FlightSimulator.Model
 {
-    class AutoPilotModel : BaseNotifyModel
+    class AutoPilotModel : BaseNotify
     {
         private IClient cs;
 

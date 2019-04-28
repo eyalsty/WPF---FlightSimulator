@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace FlightSimulator.Model
 {
-    public class FlightBoardModel : BaseNotifyModel
+    public class FlightBoardModel : BaseNotify
     {
         private IClient sender;    
         private INotifierServer reciever;
@@ -18,6 +18,7 @@ namespace FlightSimulator.Model
         
         public FlightBoardModel()
         {
+        //create singletone instance of a client and a server in order to communicate with Simulator
             sender = CommandSender.Instance;
             reciever = InfoReceiver.Instance;
 
@@ -25,7 +26,6 @@ namespace FlightSimulator.Model
             {
                 this.NotifyPropertyChanged(e.PropertyName);
             };
-
             stop = false;
         }
 
@@ -50,10 +50,10 @@ namespace FlightSimulator.Model
             sender.Connect(ip, commandPort);
         }
 
-        public void Dissconnect()
+        public void Disconnect()
         {
             stop = true;
-            sender.Dissconnect();
+            sender.Disconnect();
         }
 
         #region Latitude

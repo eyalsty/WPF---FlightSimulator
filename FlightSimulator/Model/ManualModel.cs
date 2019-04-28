@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
-    public class ManualModel : BaseNotifyModel
+    public class ManualModel : BaseNotify
     {
         private IClient client;
 

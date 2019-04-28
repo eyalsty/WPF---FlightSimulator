@@ -48,6 +48,8 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
 
+        /*Binded to Command property of a Button in order to execute the "onConnect()" 
+         * function(lambda exp) when the button being pressed */
         #region ConnectCommand
         private ICommand connectCommand;
         public ICommand ConnectCommand
@@ -57,13 +59,15 @@ namespace FlightSimulator.ViewModels
                 return connectCommand ?? (connectCommand = new CommandHandler(() => OnConnect()));
             }
         }
-
+        //runs the connect() func of the model that connects with the Flight Simulator
         private void OnConnect()
         {
             model.Connect();
         }
         #endregion
 
+        /*Binded to Command property of a Button in order to execute the "onSettings()" 
+         *function(lambda exp) when the button being pressed */
         #region SettingCommand
         private ICommand settingsCommand;
         public ICommand SettingsCommand
@@ -73,7 +77,8 @@ namespace FlightSimulator.ViewModels
                 return settingsCommand ?? (settingsCommand = new CommandHandler(() => OnSettings()));
             }
         }
-
+        
+        //displays the Settings Window
         private void OnSettings()
         {
             displayer.Show();
@@ -81,9 +86,10 @@ namespace FlightSimulator.ViewModels
         }
         #endregion
 
+        //when program ends, terminates the connection with the Flight Simulator
         public void Dissconnect(object sender, EventArgs e)
         {
-            model.Dissconnect();
+            model.Disconnect();
         }
     }
 }
